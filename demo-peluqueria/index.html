@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Peluquería Lúa · Villaejemplo</title>
+  <meta name="description" content="Peluquería Lúa en Villaejemplo: cortes, color y peinados. Pide cita por WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf7f3;
+      --surface: #ffffff;
+      --text: #2b2420;
+      --muted: #6f625a;
+      --accent: #b5523b;
+      --accent-soft: #f3dfd7;
+      --line: #eadfd8;
+      --whatsapp: #1fa855;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; line-height: 1.15; margin: 0 0 .5em; }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+    /* Aviso de demo */
+    .demo-banner {
+      background: var(--text); color: #fff; text-align: center;
+      font-size: .85rem; padding: 8px 16px;
+    }
+
+    /* Cabecera */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(251, 247, 243, .92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: "Fraunces", serif; font-weight: 700; font-size: 1.4rem; text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav ul { list-style: none; display: flex; gap: 24px; margin: 0; padding: 0; }
+    .nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; }
+    .nav ul a:hover { color: var(--accent); }
+
+    /* Botones */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 999px; font-weight: 600;
+      text-decoration: none; transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { border: 1.5px solid var(--text); }
+    .btn-whatsapp { background: var(--whatsapp); color: #fff; }
+
+    /* Portada */
+    .hero { padding: 72px 0 64px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .eyebrow { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 46ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .hero-art {
+      aspect-ratio: 4 / 5; border-radius: 28px;
+      background:
+        radial-gradient(circle at 30% 25%, #f6c9b6 0 18%, transparent 19%),
+        radial-gradient(circle at 70% 70%, #e8a58c 0 24%, transparent 25%),
+        linear-gradient(160deg, #f3dfd7, #d9876e);
+      display: flex; align-items: flex-end; padding: 24px;
+    }
+    .rating-card {
+      background: var(--surface); border-radius: var(--radius); padding: 14px 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12); font-size: .9rem;
+    }
+    .rating-card strong { font-size: 1.3rem; }
+    .stars { color: #e3a008; letter-spacing: 2px; }
+
+    /* Secciones */
+    section { padding: 64px 0; }
+    .section-head { text-align: center; margin-bottom: 40px; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+    .section-head p { color: var(--muted); margin: 0; }
+
+    /* Servicios */
+    .tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .tab {
+      border: 1px solid var(--line); background: var(--surface); color: var(--text);
+      padding: 8px 18px; border-radius: 999px; cursor: pointer; font: inherit; font-weight: 500;
+    }
+    .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .price-list { max-width: 640px; margin: 0 auto; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--line); }
+    .price-item { display: flex; justify-content: space-between; gap: 16px; padding: 16px 22px; border-bottom: 1px solid var(--line); }
+    .price-item:last-child { border-bottom: 0; }
+    .price-item small { display: block; color: var(--muted); }
+    .price { font-weight: 600; white-space: nowrap; }
+
+    /* Opiniones */
+    .reviews { background: var(--accent-soft); }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .review { background: var(--surface); border-radius: var(--radius); padding: 22px; }
+    .review p { margin: 8px 0 12px; }
+    .review span { color: var(--muted); font-size: .9rem; }
+
+    /* Info y contacto */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: 7px 0; border-bottom: 1px dashed var(--line); }
+    .hours td:last-child { text-align: right; }
+    .hours tr.today td { color: var(--accent); font-weight: 600; }
+    .open-status { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+    .open-status.open { background: #dcf5e4; color: #146c36; }
+    .open-status.closed { background: #f6e0dc; color: #8a2f1d; }
+    .map-placeholder {
+      height: 170px; border-radius: 10px; margin: 14px 0;
+      background:
+        linear-gradient(90deg, transparent 48%, #fff 48% 52%, transparent 52%),
+        linear-gradient(0deg, transparent 45%, #fff 45% 55%, transparent 55%),
+        #e6ddd5;
+      display: grid; place-items: center; font-size: 2rem;
+    }
+
+    footer { padding: 32px 0 96px; text-align: center; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
+
+    /* Botón flotante de WhatsApp */
+    .fab {
+      position: fixed; right: 18px; bottom: 18px; z-index: 20;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--whatsapp); color: #fff; display: grid; place-items: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25); text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .nav ul { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 40px; gap: 32px; }
+      .hero-art { aspect-ratio: 16 / 10; }
+      .review-grid, .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">Web de demostración · Negocio ficticio creado como ejemplo de portfolio</div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#">Lúa<span>.</span></a>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#contacto">Horario y contacto</a></li>
+      </ul>
+      <a class="btn btn-primary" href="#contacto">Pedir cita</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">Peluquería en Villaejemplo</div>
+        <h1>Tu pelo, en manos de quien te conoce.</h1>
+        <p>Cortes, color y peinados para toda la familia. Más de 10 años cuidando el pelo del pueblo, sin prisas y con productos de calidad.</p>
+        <div class="hero-actions">
+          <a class="btn btn-whatsapp" href="https://wa.me/34600000000?text=Hola%2C%20quiero%20pedir%20cita" target="_blank" rel="noopener">Pedir cita por WhatsApp</a>
+          <a class="btn btn-ghost" href="#servicios">Ver precios</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="rating-card">
+          <span class="stars">★★★★★</span><br>
+          <strong>4,9</strong> en Google · 120 opiniones
+        </div>
+      </div>
+    </div>
+
+    <section id="servicios">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Servicios y precios</h2>
+          <p>Precios orientativos. Te confirmamos el tuyo al pedir cita.</p>
+        </div>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-cat="mujer">Mujer</button>
+          <button class="tab" role="tab" aria-selected="false" data-cat="hombre">Hombre</button>
+          <button class="tab" role="tab" aria-selected="false" data-cat="color">Color</button>
+          <button class="tab" role="tab" aria-selected="false" data-cat="eventos">Eventos</button>
+        </div>
+        <div class="price-list" id="price-list"></div>
+      </div>
+    </section>
+
+    <section id="opiniones" class="reviews">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Lo que dicen nuestras clientas</h2>
+          <p>Opiniones de ejemplo para esta demostración.</p>
+        </div>
+        <div class="review-grid">
+          <div class="review"><span class="stars">★★★★★</span><p>“Me cortan el pelo aquí desde hace años y siempre salgo encantada. Trato de diez.”</p><span>— Clienta de ejemplo</span></div>
+          <div class="review"><span class="stars">★★★★★</span><p>“Me hicieron el peinado de la boda de mi hermana y aguantó toda la noche.”</p><span>— Clienta de ejemplo</span></div>
+          <div class="review"><span class="stars">★★★★★</span><p>“Pedir cita por WhatsApp es comodísimo. Rápidos y muy profesionales.”</p><span>— Cliente de ejemplo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Horario y contacto</h2>
+        </div>
+        <div class="info-grid">
+          <div class="card">
+            <h3>Horario</h3>
+            <span class="open-status" id="open-status"></span>
+            <table class="hours" id="hours"></table>
+          </div>
+          <div class="card">
+            <h3>Dónde estamos</h3>
+            <p>Calle Mayor, 12 · Villaejemplo</p>
+            <div class="map-placeholder" aria-hidden="true">📍</div>
+            <div class="hero-actions">
+              <a class="btn btn-whatsapp" href="https://wa.me/34600000000?text=Hola%2C%20quiero%20pedir%20cita" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn btn-ghost" href="tel:+34600000000">Llamar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© Peluquería Lúa (ficticia) · Web de ejemplo</div>
+  </footer>
+
+  <a class="fab" href="https://wa.me/34600000000?text=Hola%2C%20quiero%20pedir%20cita" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg>
+  </a>
+
+  <script>
+    // ---- Precios: edita solo esta lista para cambiar la carta de servicios ----
+    const servicios = {
+      mujer: [
+        ["Corte y peinado", "Lavado incluido", "18 €"],
+        ["Peinado", "Secado con forma o plancha", "12 €"],
+        ["Corte niña", "Hasta 12 años", "12 €"],
+      ],
+      hombre: [
+        ["Corte", "Lavado incluido", "12 €"],
+        ["Corte + barba", "Perfilado con navaja", "16 €"],
+        ["Corte niño", "Hasta 12 años", "9 €"],
+      ],
+      color: [
+        ["Tinte raíz", "Hasta 3 cm", "28 €"],
+        ["Mechas", "Según largo", "desde 45 €"],
+        ["Balayage", "Incluye matiz", "desde 70 €"],
+      ],
+      eventos: [
+        ["Recogido", "Bodas, comuniones, fiestas", "35 €"],
+        ["Prueba de novia", "Con asesoramiento", "40 €"],
+      ],
+    };
+
+    // ---- Horario: [día, apertura mañana, cierre mañana, apertura tarde, cierre tarde] ----
+    const horario = [
+      ["Domingo", null],
+      ["Lunes", null],
+      ["Martes", "09:30", "13:30", "16:30", "20:00"],
+      ["Miércoles", "09:30", "13:30", "16:30", "20:00"],
+      ["Jueves", "09:30", "13:30", "16:30", "20:00"],
+      ["Viernes", "09:30", "14:00", "16:00", "20:30"],
+      ["Sábado", "09:00", "14:00"],
+    ];
+
+    // Pestañas de servicios
+    const lista = document.getElementById("price-list");
+    function pintarServicios(cat) {
+      lista.innerHTML = servicios[cat].map(([nombre, detalle, precio]) =>
+        `<div class="price-item"><div>${nombre}<small>${detalle}</small></div><div class="price">${precio}</div></div>`
+      ).join("");
+    }
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", "false"));
+        tab.setAttribute("aria-selected", "true");
+        pintarServicios(tab.dataset.cat);
+      });
+    });
+    pintarServicios("mujer");
+
+    // Horario con el día de hoy resaltado y estado abierto/cerrado
+    const ahora = new Date();
+    const hoy = ahora.getDay();
+    const minutos = ahora.getHours() * 60 + ahora.getMinutes();
+    const aMin = h => { const [hh, mm] = h.split(":").map(Number); return hh * 60 + mm; };
+
+    const orden = [1, 2, 3, 4, 5, 6, 0]; // empezar la semana en lunes
+    document.getElementById("hours").innerHTML = orden.map(i => {
+      const [dia, ...tramos] = horario[i];
+      const texto = tramos[0] ? (tramos.length > 2 ? `${tramos[0]}–${tramos[1]} · ${tramos[2]}–${tramos[3]}` : `${tramos[0]}–${tramos[1]}`) : "Cerrado";
+      return `<tr class="${i === hoy ? "today" : ""}"><td>${dia}</td><td>${texto}</td></tr>`;
+    }).join("");
+
+    const tramosHoy = horario[hoy].slice(1);
+    let abierto = false;
+    for (let i = 0; i + 1 < tramosHoy.length; i += 2) {
+      if (tramosHoy[i] && minutos >= aMin(tramosHoy[i]) && minutos < aMin(tramosHoy[i + 1])) abierto = true;
+    }
+    const estado = document.getElementById("open-status");
+    estado.textContent = abierto ? "Abierto ahora" : "Cerrado ahora";
+    estado.className = "open-status " + (abierto ? "open" : "closed");
+  </script>
+</body>
+</html>
