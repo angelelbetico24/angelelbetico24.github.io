@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruiz Auto Repair · Sampletown</title>
+  <meta name="description" content="Ruiz Auto Repair in Sampletown: general repairs, maintenance, tires and inspection prep. Get a quote via WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --text: #14202b;
+      --muted: #5b6b7a;
+      --primary: #1d4e89;
+      --primary-dark: #143a68;
+      --accent: #f5b301;
+      --line: #dde3ea;
+      --whatsapp: #1fa855;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    h1, h2, h3 { font-family: "Archivo", system-ui, sans-serif; line-height: 1.1; margin: 0 0 .5em; }
+    a { color: inherit; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+    .demo-banner { background: var(--text); color: #fff; text-align: center; font-size: .85rem; padding: 8px 16px; }
+
+    header { position: sticky; top: 0; z-index: 10; background: var(--surface); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 1.3rem; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .logo-mark { width: 32px; height: 32px; border-radius: 8px; background: var(--accent); display: grid; place-items: center; font-size: 1rem; }
+    .nav ul { list-style: none; display: flex; gap: 24px; margin: 0; padding: 0; }
+    .nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; }
+    .nav ul a:hover { color: var(--primary); }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-weight: 600; text-decoration: none; border: 0; cursor: pointer; font: inherit; font-weight: 600; transition: transform .15s, box-shadow .15s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.15); }
+    .btn-primary { background: var(--accent); color: var(--text); }
+    .btn-ghost { border: 1.5px solid currentColor; background: transparent; }
+    .btn-whatsapp { background: var(--whatsapp); color: #fff; }
+
+    /* Portada */
+    .hero { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; padding: 72px 0 96px; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; right: -80px; top: -80px; width: 360px; height: 360px; border-radius: 50%; border: 40px solid rgba(245,179,1,.18); }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; position: relative; z-index: 1; }
+    .eyebrow { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: .8rem; }
+    .hero h1 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); }
+    .hero p { color: #c9d6e6; font-size: 1.1rem; max-width: 48ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .trust { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .trust li { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: var(--radius); padding: 14px 18px; display: flex; gap: 12px; align-items: center; }
+    .trust strong { display: block; }
+    .trust span { color: #c9d6e6; font-size: .9rem; }
+    .trust .ico { font-size: 1.4rem; }
+
+    section { padding: 72px 0; }
+    .section-head { text-align: center; margin-bottom: 36px; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+    .section-head p { color: var(--muted); margin: 0; }
+
+    /* Servicios */
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; }
+    .service .ico { font-size: 1.6rem; }
+    .service h3 { font-size: 1.15rem; margin: 10px 0 4px; }
+    .service p { color: var(--muted); margin: 0 0 12px; font-size: .95rem; flex: 1; }
+    .service .price { font-weight: 700; color: var(--primary); }
+
+    /* Presupuesto */
+    .quote { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .quote-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: start; }
+    .quote-grid > div > p { color: var(--muted); }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { font-weight: 500; font-size: .9rem; display: grid; gap: 6px; }
+    label.full { grid-column: 1 / -1; }
+    input, select, textarea { font: inherit; padding: 11px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text); }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+    textarea { resize: vertical; min-height: 90px; }
+    form .btn { grid-column: 1 / -1; }
+    .form-note { grid-column: 1 / -1; font-size: .8rem; color: var(--muted); margin: 0; }
+
+    /* Revisión */
+    .checker { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; max-width: 640px; margin: 0 auto; }
+    .checker form { margin-bottom: 16px; }
+    .result { border-radius: 10px; padding: 16px; display: none; }
+    .result.ok { display: block; background: #e5f5ea; color: #155e2f; }
+    .result.warn { display: block; background: #fff4d6; color: #7a5600; }
+    .result.bad { display: block; background: #fde6e3; color: #8a2a1b; }
+
+    /* FAQ */
+    .faq { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
+    details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; }
+    summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--primary); font-size: 1.3rem; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+
+    /* Info */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .card p { color: var(--muted); }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: 7px 0; border-bottom: 1px dashed var(--line); }
+    .hours td:last-child { text-align: right; }
+    .hours tr.today td { color: var(--primary); font-weight: 600; }
+    .open-status { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+    .open-status.open { background: #e5f5ea; color: #155e2f; }
+    .open-status.closed { background: #fde6e3; color: #8a2a1b; }
+
+    footer { padding: 32px 0 96px; text-align: center; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
+    .fab { position: fixed; right: 18px; bottom: 18px; z-index: 20; width: 58px; height: 58px; border-radius: 50%; background: var(--whatsapp); color: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.25); text-decoration: none; }
+
+    @media (max-width: 860px) {
+      .services { grid-template-columns: 1fr 1fr; }
+      .hero-grid, .quote-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav ul { display: none; }
+      .nav .btn { padding: 10px 14px; }
+      .services, .info-grid, form { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">Demo website · Fictional business created as a portfolio sample</div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#"><span class="logo-mark" aria-hidden="true">🔧</span>Ruiz Auto Repair</a>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#quote">Get a quote</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#info">Hours</a></li>
+      </ul>
+      <a class="btn btn-primary" href="#quote">Get a quote</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Auto repair shop in Sampletown</div>
+          <h1>Your car, running right. No surprises on the bill.</h1>
+          <p>General repairs, maintenance, tires and inspection prep. You get a quote before we touch anything, and a message as soon as your car is ready.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#quote">Get a free quote</a>
+            <a class="btn btn-ghost" href="tel:+15550100000">Call now</a>
+          </div>
+        </div>
+        <ul class="trust">
+          <li><span class="ico" aria-hidden="true">📋</span><div><strong>Quote before any repair</strong><span>Written and no obligation</span></div></li>
+          <li><span class="ico" aria-hidden="true">🛡️</span><div><strong>Warranty on every repair</strong><span>Parts and labor</span></div></li>
+          <li><span class="ico" aria-hidden="true">🚗</span><div><strong>All makes and models</strong><span>Gas, diesel and hybrid</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Services</h2>
+          <p>Starting prices for a standard car. We'll confirm the exact price for yours.</p>
+        </div>
+        <div class="services" id="services-list"></div>
+      </div>
+    </section>
+
+    <section id="quote" class="quote">
+      <div class="wrap quote-grid">
+        <div>
+          <h2>Get a quote in 1 minute</h2>
+          <p>Fill in your details and WhatsApp will open with the message ready to go. Just hit send and we'll reply the same day.</p>
+          <p>Prefer to call? <a href="tel:+15550100000"><strong>(555) 010-0000</strong></a></p>
+        </div>
+        <form id="quote-form">
+          <label>Make & model
+            <input name="model" placeholder="e.g. Honda Civic 2016" required>
+          </label>
+          <label>Mileage (approx.)
+            <input name="miles" type="number" min="0" step="1000" placeholder="e.g. 75000">
+          </label>
+          <label class="full">What do you need?
+            <select name="service" id="service-select"></select>
+          </label>
+          <label class="full">Tell us more (optional)
+            <textarea name="details" placeholder="e.g. squeaking noise when braking for about a week"></textarea>
+          </label>
+          <button class="btn btn-whatsapp" type="submit">Send via WhatsApp</button>
+          <p class="form-note">We don't store any data: the message is sent from your own WhatsApp.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="service-check">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Is your car due for service?</h2>
+          <p>Find out in 10 seconds.</p>
+        </div>
+        <div class="checker">
+          <form id="check-form">
+            <label>Date of last service
+              <input type="month" name="date" required>
+            </label>
+            <label>Miles driven since then (approx.)
+              <input type="number" name="miles" min="0" step="500" placeholder="e.g. 6000" required>
+            </label>
+            <button class="btn btn-primary" type="submit">Check</button>
+          </form>
+          <div class="result" id="check-result" role="status"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head"><h2>Frequently asked questions</h2></div>
+        <div class="faq" id="faq-list"></div>
+      </div>
+    </section>
+
+    <section id="info">
+      <div class="wrap">
+        <div class="section-head"><h2>Hours & location</h2></div>
+        <div class="info-grid">
+          <div class="card">
+            <h3>Opening hours</h3>
+            <span class="open-status" id="open-status"></span>
+            <table class="hours" id="hours"></table>
+          </div>
+          <div class="card">
+            <h3>Find us</h3>
+            <p>7 Industrial Park Road · Sampletown<br>Free customer parking</p>
+            <div class="hero-actions">
+              <a class="btn btn-whatsapp" href="https://wa.me/15550100000" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn btn-ghost" href="tel:+15550100000">Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© Ruiz Auto Repair (fictional) · Sample website</div>
+  </footer>
+
+  <a class="fab" href="https://wa.me/15550100000" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg>
+  </a>
+
+  <script>
+    // =====================================================================
+    //  BUSINESS DATA: to adapt this site for a client, edit only this part
+    // =====================================================================
+
+    const whatsappNumber = "15550100000"; // country code + number, no + or spaces
+
+    // Services: [icon, name, description, price]
+    const services = [
+      ["🛢️", "Oil & filter change", "Manufacturer-spec oil, oil, air and cabin filters.", "from $69"],
+      ["🔍", "Full inspection", "30+ point check and computer diagnostics.", "from $99"],
+      ["🛞", "Tires", "Mounting, balancing and alignment. All brands.", "from $20/tire"],
+      ["🛑", "Brakes", "Pads, rotors and brake fluid.", "from $129"],
+      ["❄️", "A/C service", "Recharge and leak check.", "from $89"],
+      ["✅", "Inspection prep", "We check everything the state inspection looks at, so you pass first time.", "$39"],
+    ];
+
+    // Recommended service interval
+    const serviceEveryMonths = 12;
+    const serviceEveryMiles = 10000;
+
+    // FAQ: [question, answer]
+    const faq = [
+      ["Do I need an appointment?", "For maintenance and repairs, yes: that way your car gets in the same day. For quick jobs (a bulb, tire pressure) just drop by."],
+      ["Will servicing here affect my manufacturer warranty?", "No. We use quality parts that meet manufacturer specs, follow the recommended maintenance schedule and keep a record of the service."],
+      ["How long does a service take?", "Usually 2 to 4 hours. Drop your car off in the morning and pick it up in the afternoon."],
+      ["Will you call me before doing extra work?", "Always. If we find something else, we'll call or text you with the price before touching it."],
+      ["What payment methods do you accept?", "Cash, all major cards, Apple Pay and Google Pay."],
+    ];
+
+    // Hours: [day, open, close, open, close] in 24h format; shown as am/pm
+    const hours = [
+      ["Sunday", null],
+      ["Monday", "08:00", "12:30", "13:30", "18:00"],
+      ["Tuesday", "08:00", "12:30", "13:30", "18:00"],
+      ["Wednesday", "08:00", "12:30", "13:30", "18:00"],
+      ["Thursday", "08:00", "12:30", "13:30", "18:00"],
+      ["Friday", "08:00", "15:00"],
+      ["Saturday", "09:00", "13:00"],
+    ];
+
+    // =====================================================================
+    //  LOGIC (no need to touch this)
+    // =====================================================================
+
+    const nf = n => n.toLocaleString("en-US");
+
+    document.getElementById("services-list").innerHTML = services.map(([ico, name, desc, price]) => `
+      <div class="service">
+        <span class="ico" aria-hidden="true">${ico}</span>
+        <h3>${name}</h3>
+        <p>${desc}</p>
+        <span class="price">${price}</span>
+      </div>`).join("");
+
+    document.getElementById("service-select").innerHTML =
+      services.map(s => `<option>${s[1]}</option>`).join("") + `<option>Other problem / not sure</option>`;
+
+    // Quote: builds the message and opens WhatsApp
+    document.getElementById("quote-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const d = new FormData(e.target);
+      const lines = [
+        "Hi, I'd like a quote:",
+        `• Car: ${d.get("model")}`,
+        d.get("miles") ? `• Mileage: ${nf(Number(d.get("miles")))}` : null,
+        `• Service: ${d.get("service")}`,
+        d.get("details") ? `• Details: ${d.get("details")}` : null,
+      ].filter(Boolean);
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+    });
+
+    // Service checker
+    document.getElementById("check-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const d = new FormData(e.target);
+      const [year, month] = d.get("date").split("-").map(Number);
+      const miles = Number(d.get("miles"));
+      const now = new Date();
+      const months = (now.getFullYear() - year) * 12 + (now.getMonth() + 1 - month);
+      const res = document.getElementById("check-result");
+
+      if (months < 0) {
+        res.className = "result warn";
+        res.textContent = "That date is in the future. Please check the month you entered.";
+        return;
+      }
+      const pctTime = months / serviceEveryMonths;
+      const pctMiles = miles / serviceEveryMiles;
+      const pct = Math.max(pctTime, pctMiles);
+      const reason = pctTime >= pctMiles ? `it's been ${months} months` : `you've driven ${nf(miles)} miles`;
+
+      if (pct >= 1) {
+        res.className = "result bad";
+        res.innerHTML = `<strong>You're due for service:</strong> ${reason}. We recommend a service every ${serviceEveryMonths} months or ${nf(serviceEveryMiles)} miles. <a href="#quote">Book here</a>.`;
+      } else if (pct >= 0.8) {
+        res.className = "result warn";
+        res.innerHTML = `<strong>Almost due:</strong> ${reason}. Book a slot for the next few weeks. <a href="#quote">Get a quote</a>.`;
+      } else {
+        const monthsLeft = Math.max(0, serviceEveryMonths - months);
+        const milesLeft = Math.max(0, serviceEveryMiles - miles);
+        res.className = "result ok";
+        res.innerHTML = `<strong>You're good.</strong> About ${monthsLeft} months or ${nf(milesLeft)} miles to go, whichever comes first.`;
+      }
+    });
+
+    // FAQ
+    document.getElementById("faq-list").innerHTML = faq.map(([q, a]) =>
+      `<details><summary>${q}</summary><p>${a}</p></details>`
+    ).join("");
+
+    // Hours with today highlighted and open/closed status
+    const toMin = h => { const [hh, mm] = h.split(":").map(Number); return hh * 60 + mm; };
+    const fmt = h => { const [hh, mm] = h.split(":").map(Number); const ap = hh >= 12 ? "pm" : "am"; const h12 = hh % 12 || 12; return mm ? `${h12}:${String(mm).padStart(2, "0")}${ap}` : `${h12}${ap}`; };
+    const now = new Date();
+    const day = now.getDay();
+    const min = now.getHours() * 60 + now.getMinutes();
+    const slots = hours[day].slice(1);
+    let open = false;
+    for (let i = 0; i + 1 < slots.length; i += 2) {
+      if (slots[i] && min >= toMin(slots[i]) && min < toMin(slots[i + 1])) open = true;
+    }
+    const order = [1, 2, 3, 4, 5, 6, 0];
+    document.getElementById("hours").innerHTML = order.map(i => {
+      const [name, ...t] = hours[i];
+      const text = t[0] ? (t.length > 2 ? `${fmt(t[0])}–${fmt(t[1])} · ${fmt(t[2])}–${fmt(t[3])}` : `${fmt(t[0])}–${fmt(t[1])}`) : "Closed";
+      return `<tr class="${i === day ? "today" : ""}"><td>${name}</td><td>${text}</td></tr>`;
+    }).join("");
+    const status = document.getElementById("open-status");
+    status.textContent = open ? "Open now" : "Closed now";
+    status.className = "open-status " + (open ? "open" : "closed");
+  </script>
+</body>
+</html>

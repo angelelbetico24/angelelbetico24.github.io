@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lúa Hair Studio · Sampletown</title>
+  <meta name="description" content="Lúa Hair Studio in Sampletown: cuts, color and styling. Book your appointment online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf7f3;
+      --surface: #ffffff;
+      --text: #2b2420;
+      --muted: #6f625a;
+      --accent: #b5523b;
+      --accent-soft: #f3dfd7;
+      --line: #eadfd8;
+      --whatsapp: #1fa855;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; line-height: 1.15; margin: 0 0 .5em; }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+    /* Aviso de demo */
+    .demo-banner {
+      background: var(--text); color: #fff; text-align: center;
+      font-size: .85rem; padding: 8px 16px;
+    }
+
+    /* Cabecera */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(251, 247, 243, .92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: "Fraunces", serif; font-weight: 700; font-size: 1.4rem; text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav ul { list-style: none; display: flex; gap: 24px; margin: 0; padding: 0; }
+    .nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; }
+    .nav ul a:hover { color: var(--accent); }
+
+    /* Botones */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 999px; font-weight: 600;
+      text-decoration: none; transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { border: 1.5px solid var(--text); }
+    .btn-whatsapp { background: var(--whatsapp); color: #fff; }
+
+    /* Portada */
+    .hero { padding: 72px 0 64px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .eyebrow { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 46ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .hero-art {
+      aspect-ratio: 4 / 5; border-radius: 28px;
+      background:
+        radial-gradient(circle at 30% 25%, #f6c9b6 0 18%, transparent 19%),
+        radial-gradient(circle at 70% 70%, #e8a58c 0 24%, transparent 25%),
+        linear-gradient(160deg, #f3dfd7, #d9876e);
+      display: flex; align-items: flex-end; padding: 24px;
+    }
+    .rating-card {
+      background: var(--surface); border-radius: var(--radius); padding: 14px 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12); font-size: .9rem;
+    }
+    .rating-card strong { font-size: 1.3rem; }
+    .stars { color: #e3a008; letter-spacing: 2px; }
+
+    /* Secciones */
+    section { padding: 64px 0; }
+    .section-head { text-align: center; margin-bottom: 40px; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+    .section-head p { color: var(--muted); margin: 0; }
+
+    /* Servicios */
+    .tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .tab {
+      border: 1px solid var(--line); background: var(--surface); color: var(--text);
+      padding: 8px 18px; border-radius: 999px; cursor: pointer; font: inherit; font-weight: 500;
+    }
+    .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .price-list { max-width: 640px; margin: 0 auto; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--line); }
+    .price-item { display: flex; justify-content: space-between; gap: 16px; padding: 16px 22px; border-bottom: 1px solid var(--line); }
+    .price-item:last-child { border-bottom: 0; }
+    .price-item small { display: block; color: var(--muted); }
+    .price { font-weight: 600; white-space: nowrap; }
+
+    /* Opiniones */
+    .reviews { background: var(--accent-soft); }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .review { background: var(--surface); border-radius: var(--radius); padding: 22px; }
+    .review p { margin: 8px 0 12px; }
+    .review span { color: var(--muted); font-size: .9rem; }
+
+    /* Info y contacto */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: 7px 0; border-bottom: 1px dashed var(--line); }
+    .hours td:last-child { text-align: right; }
+    .hours tr.today td { color: var(--accent); font-weight: 600; }
+    .open-status { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+    .open-status.open { background: #dcf5e4; color: #146c36; }
+    .open-status.closed { background: #f6e0dc; color: #8a2f1d; }
+    .map-placeholder {
+      height: 170px; border-radius: 10px; margin: 14px 0;
+      background:
+        linear-gradient(90deg, transparent 48%, #fff 48% 52%, transparent 52%),
+        linear-gradient(0deg, transparent 45%, #fff 45% 55%, transparent 55%),
+        #e6ddd5;
+      display: grid; place-items: center; font-size: 2rem;
+    }
+
+    footer { padding: 32px 0 96px; text-align: center; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
+
+    /* Botón flotante de WhatsApp */
+    .fab {
+      position: fixed; right: 18px; bottom: 18px; z-index: 20;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--whatsapp); color: #fff; display: grid; place-items: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25); text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .nav ul { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 40px; gap: 32px; }
+      .hero-art { aspect-ratio: 16 / 10; }
+      .review-grid, .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">Demo website · Fictional business created as a portfolio sample</div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#">Lúa<span>.</span></a>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Hours & contact</a></li>
+      </ul>
+      <a class="btn btn-primary" href="#contact">Book now</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">Hair studio in Sampletown</div>
+        <h1>Great hair, from people who know you.</h1>
+        <p>Cuts, color and styling for the whole family. Over 10 years looking after the neighborhood, never rushed, always with quality products.</p>
+        <div class="hero-actions">
+          <a class="btn btn-whatsapp" href="https://wa.me/15550100000?text=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener">Book via WhatsApp</a>
+          <a class="btn btn-ghost" href="#services">See prices</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="rating-card">
+          <span class="stars">★★★★★</span><br>
+          <strong>4.9</strong> on Google · 120 reviews
+        </div>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Services & prices</h2>
+          <p>Starting prices. We'll confirm yours when you book.</p>
+        </div>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-cat="women">Women</button>
+          <button class="tab" role="tab" aria-selected="false" data-cat="men">Men</button>
+          <button class="tab" role="tab" aria-selected="false" data-cat="color">Color</button>
+          <button class="tab" role="tab" aria-selected="false" data-cat="events">Events</button>
+        </div>
+        <div class="price-list" id="price-list"></div>
+      </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>What our clients say</h2>
+          <p>Sample reviews for this demo.</p>
+        </div>
+        <div class="review-grid">
+          <div class="review"><span class="stars">★★★★★</span><p>“I've been coming here for years and I always leave happy. Lovely people.”</p><span>— Sample client</span></div>
+          <div class="review"><span class="stars">★★★★★</span><p>“They did my hair for my sister's wedding and it lasted all night.”</p><span>— Sample client</span></div>
+          <div class="review"><span class="stars">★★★★★</span><p>“Booking by message is so easy. Quick and very professional.”</p><span>— Sample client</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Hours & contact</h2>
+        </div>
+        <div class="info-grid">
+          <div class="card">
+            <h3>Opening hours</h3>
+            <span class="open-status" id="open-status"></span>
+            <table class="hours" id="hours"></table>
+          </div>
+          <div class="card">
+            <h3>Find us</h3>
+            <p>12 Main Street · Sampletown</p>
+            <div class="map-placeholder" aria-hidden="true">📍</div>
+            <div class="hero-actions">
+              <a class="btn btn-whatsapp" href="https://wa.me/15550100000?text=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn btn-ghost" href="tel:+15550100000">Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© Lúa Hair Studio (fictional) · Sample website</div>
+  </footer>
+
+  <a class="fab" href="https://wa.me/15550100000?text=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg>
+  </a>
+
+  <script>
+    // ---- Services: edit only this list to change the price menu ----
+    const services = {
+      women: [
+        ["Cut & style", "Wash included", "$45"],
+        ["Blow-dry", "Smooth or curled finish", "$30"],
+        ["Girls' cut", "Under 12", "$25"],
+      ],
+      men: [
+        ["Haircut", "Wash included", "$30"],
+        ["Cut + beard trim", "Straight-razor line-up", "$40"],
+        ["Boys' cut", "Under 12", "$20"],
+      ],
+      color: [
+        ["Root touch-up", "Up to 1 inch", "$65"],
+        ["Highlights", "Depending on length", "from $110"],
+        ["Balayage", "Toner included", "from $160"],
+      ],
+      events: [
+        ["Updo", "Weddings, proms, parties", "$75"],
+        ["Bridal trial", "With consultation", "$85"],
+      ],
+    };
+
+    // ---- Hours: [day, open, close, open, close] in 24h format; shown as am/pm ----
+    const hours = [
+      ["Sunday", null],
+      ["Monday", null],
+      ["Tuesday", "09:30", "13:30", "14:30", "19:00"],
+      ["Wednesday", "09:30", "13:30", "14:30", "19:00"],
+      ["Thursday", "09:30", "13:30", "14:30", "20:00"],
+      ["Friday", "09:30", "13:30", "14:30", "20:00"],
+      ["Saturday", "09:00", "15:00"],
+    ];
+
+    // Service tabs
+    const list = document.getElementById("price-list");
+    function renderServices(cat) {
+      list.innerHTML = services[cat].map(([name, detail, price]) =>
+        `<div class="price-item"><div>${name}<small>${detail}</small></div><div class="price">${price}</div></div>`
+      ).join("");
+    }
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", "false"));
+        tab.setAttribute("aria-selected", "true");
+        renderServices(tab.dataset.cat);
+      });
+    });
+    renderServices("women");
+
+    // Hours with today highlighted and open/closed status
+    const toMin = h => { const [hh, mm] = h.split(":").map(Number); return hh * 60 + mm; };
+    const fmt = h => { const [hh, mm] = h.split(":").map(Number); const ap = hh >= 12 && hh < 24 ? "pm" : "am"; const h12 = hh % 12 || 12; return mm ? `${h12}:${String(mm).padStart(2, "0")}${ap}` : `${h12}${ap}`; };
+    const now = new Date();
+    const today = now.getDay();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+
+    const order = [1, 2, 3, 4, 5, 6, 0]; // week starts on Monday
+    document.getElementById("hours").innerHTML = order.map(i => {
+      const [day, ...slots] = hours[i];
+      const text = slots[0] ? (slots.length > 2 ? `${fmt(slots[0])}–${fmt(slots[1])} · ${fmt(slots[2])}–${fmt(slots[3])}` : `${fmt(slots[0])}–${fmt(slots[1])}`) : "Closed";
+      return `<tr class="${i === today ? "today" : ""}"><td>${day}</td><td>${text}</td></tr>`;
+    }).join("");
+
+    const slotsToday = hours[today].slice(1);
+    let open = false;
+    for (let i = 0; i + 1 < slotsToday.length; i += 2) {
+      if (slotsToday[i] && minutes >= toMin(slotsToday[i]) && minutes < toMin(slotsToday[i + 1])) open = true;
+    }
+    const status = document.getElementById("open-status");
+    status.textContent = open ? "Open now" : "Closed now";
+    status.className = "open-status " + (open ? "open" : "closed");
+  </script>
+</body>
+</html>

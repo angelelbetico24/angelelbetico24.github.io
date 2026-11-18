@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Olive Tapas Bar · Sampletown</title>
+  <meta name="description" content="The Olive Tapas Bar in Sampletown: Spanish tapas, sharing plates and a daily lunch special. Menu with allergen filters and table booking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1c1a17;
+      --surface: #26231f;
+      --surface-2: #302c27;
+      --text: #f4ede2;
+      --muted: #b3a896;
+      --accent: #d9a441;
+      --olive: #8a9a5b;
+      --line: #3b362f;
+      --whatsapp: #1fa855;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Work Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; line-height: 1.1; margin: 0 0 .5em; }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+    .demo-banner { background: var(--accent); color: #1c1a17; text-align: center; font-size: .85rem; font-weight: 600; padding: 8px 16px; }
+
+    /* Cabecera */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(28, 26, 23, .92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: "Playfair Display", serif; font-weight: 800; font-size: 1.35rem; text-decoration: none; }
+    .logo span { color: var(--olive); }
+    .nav ul { list-style: none; display: flex; gap: 24px; margin: 0; padding: 0; }
+    .nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; }
+    .nav ul a:hover { color: var(--accent); }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; transition: transform .15s, box-shadow .15s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+    .btn-primary { background: var(--accent); color: #1c1a17; }
+    .btn-ghost { border: 1.5px solid var(--text); }
+    .btn-whatsapp { background: var(--whatsapp); color: #fff; }
+
+    /* Portada */
+    .hero {
+      padding: 96px 0 80px; text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(217,164,65,.22), transparent 60%),
+        radial-gradient(circle at 15% 80%, rgba(138,154,91,.18), transparent 40%);
+    }
+    .eyebrow { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; }
+    .hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); max-width: 16ch; margin: 12px auto 16px; }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 52ch; margin: 0 auto; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+
+    /* Menú del día destacado */
+    .daily {
+      margin-top: -32px; position: relative;
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px; display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center;
+    }
+    .daily .badge { background: var(--olive); color: #fff; border-radius: 12px; padding: 14px; text-align: center; font-weight: 600; line-height: 1.2; }
+    .daily .badge strong { display: block; font-size: 1.6rem; font-family: "Playfair Display", serif; }
+    .daily ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .daily h3 { margin-bottom: 4px; }
+
+    section { padding: 72px 0; }
+    .section-head { text-align: center; margin-bottom: 36px; }
+    .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+    .section-head p { color: var(--muted); margin: 0; }
+
+    /* Carta */
+    .controls { display: flex; flex-direction: column; gap: 14px; align-items: center; margin-bottom: 28px; }
+    .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .chip {
+      border: 1px solid var(--line); background: var(--surface); color: var(--text);
+      padding: 8px 16px; border-radius: 999px; cursor: pointer; font: inherit; font-weight: 500;
+    }
+    .chip[aria-pressed="true"], .chip[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #1c1a17; }
+    .chip.filter[aria-pressed="true"] { background: var(--olive); border-color: var(--olive); color: #fff; }
+    .label { color: var(--muted); font-size: .85rem; }
+
+    .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .dish { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+    .dish-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .dish h3 { font-family: "Work Sans", sans-serif; font-size: 1.05rem; font-weight: 600; margin: 0; }
+    .dish .price { color: var(--accent); font-weight: 600; white-space: nowrap; }
+    .dish p { color: var(--muted); margin: 4px 0 10px; font-size: .95rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: .75rem; padding: 2px 9px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
+    .tag.veg { color: #c3d49a; }
+    .empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 24px; }
+    .allergen-note { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 20px; }
+
+    /* Info */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: 7px 0; border-bottom: 1px dashed var(--line); }
+    .hours td:last-child { text-align: right; }
+    .hours tr.today td { color: var(--accent); font-weight: 600; }
+    .open-status { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+    .open-status.open { background: rgba(31,168,85,.18); color: #6fdc98; }
+    .open-status.closed { background: rgba(217,90,65,.18); color: #f0a08f; }
+    .card p { color: var(--muted); }
+    .card .btn-ghost { color: var(--text); }
+
+    footer { padding: 32px 0 96px; text-align: center; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
+
+    .fab { position: fixed; right: 18px; bottom: 18px; z-index: 20; width: 58px; height: 58px; border-radius: 50%; background: var(--whatsapp); color: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.4); text-decoration: none; }
+
+    @media (max-width: 760px) {
+      .nav ul { display: none; }
+      .hero { padding: 64px 0 72px; }
+      .daily { grid-template-columns: 1fr; text-align: center; }
+      .daily ul { list-style: none; padding: 0; }
+      .menu, .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">Demo website · Fictional business created as a portfolio sample</div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#">The Olive<span>.</span></a>
+      <ul>
+        <li><a href="#menu-section">Menu</a></li>
+        <li><a href="#info">Hours & location</a></li>
+      </ul>
+      <a class="btn btn-primary" href="https://wa.me/15550100000?text=Hi%2C%20I%27d%20like%20to%20book%20a%20table" target="_blank" rel="noopener">Book a table</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Spanish tapas bar in Sampletown · since 1998</div>
+        <h1>Classic tapas, right on the main square.</h1>
+        <p>Home-style cooking, local produce and the best patio in town. Drop in for a drink or book a table for dinner.</p>
+        <div class="hero-actions">
+          <a class="btn btn-whatsapp" href="https://wa.me/15550100000?text=Hi%2C%20I%27d%20like%20to%20book%20a%20table" target="_blank" rel="noopener">Book via WhatsApp</a>
+          <a class="btn btn-ghost" href="#menu-section">See the menu</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="daily">
+        <div class="badge">Lunch special<strong>$16.50</strong>Mon–Fri, noon</div>
+        <div>
+          <h3>Today's lunch special</h3>
+          <ul id="daily-list"></ul>
+        </div>
+        <a class="btn btn-primary" href="https://wa.me/15550100000?text=Hi%2C%20I%27d%20like%20to%20book%20for%20the%20lunch%20special" target="_blank" rel="noopener">Book lunch</a>
+      </div>
+    </div>
+
+    <section id="menu-section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Our menu</h2>
+          <p>Filter by dietary needs to see only what you can eat.</p>
+        </div>
+
+        <div class="controls">
+          <div class="row" role="tablist" id="cat-tabs"></div>
+          <span class="label">Show only dishes that are:</span>
+          <div class="row" id="filters"></div>
+        </div>
+
+        <div class="menu" id="menu"></div>
+        <p class="allergen-note">Have an allergy or intolerance? Just ask: we'll tell you every ingredient.</p>
+      </div>
+    </section>
+
+    <section id="info">
+      <div class="wrap">
+        <div class="section-head"><h2>Hours & location</h2></div>
+        <div class="info-grid">
+          <div class="card">
+            <h3>Opening hours</h3>
+            <span class="open-status" id="open-status"></span>
+            <table class="hours" id="hours"></table>
+          </div>
+          <div class="card">
+            <h3>Find us</h3>
+            <p>3 Main Square · Sampletown<br>Patio open all year · Dogs welcome on the patio</p>
+            <div class="hero-actions" style="justify-content:flex-start">
+              <a class="btn btn-whatsapp" href="https://wa.me/15550100000?text=Hi%2C%20I%27d%20like%20to%20book%20a%20table" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn btn-ghost" href="tel:+15550100000">Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© The Olive Tapas Bar (fictional) · Sample website</div>
+  </footer>
+
+  <a class="fab" href="https://wa.me/15550100000?text=Hi%2C%20I%27d%20like%20to%20book%20a%20table" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg>
+  </a>
+
+  <script>
+    // =====================================================================
+    //  BUSINESS DATA: to adapt this site for a client, edit only this part
+    // =====================================================================
+
+    const lunchSpecial = [
+      "Starter: Spanish lentil stew or garden salad",
+      "Main: Iberian pork with potatoes or grilled hake",
+      "Homemade dessert, bread and a drink included",
+    ];
+
+    const allergens = {
+      gluten: "Gluten",
+      dairy: "Dairy",
+      egg: "Egg",
+      fish: "Fish",
+      shellfish: "Shellfish",
+      nuts: "Tree nuts",
+    };
+
+    // Menu: category -> [name, description, price, [allergens], vegetarian]
+    const menu = {
+      "Tapas": [
+        ["Patatas bravas", "Crispy potatoes with spicy brava sauce and aioli", "$7.50", ["egg"], true],
+        ["Ham croquettes", "6 pieces, made in house", "$11.00", ["gluten", "dairy", "egg"], false],
+        ["Padrón peppers", "Blistered, with flaky sea salt", "$8.50", [], true],
+        ["Marinated anchovies", "With garlic and parsley", "$9.50", ["fish"], false],
+      ],
+      "Sharing plates": [
+        ["Iberian charcuterie board", "Cured ham, loin and chorizo", "$24.00", [], false],
+        ["Fried calamari", "With lemon", "$16.00", ["gluten", "egg", "shellfish"], false],
+        ["Aged sheep cheese with walnuts", "Local Manchego-style cheese", "$14.00", ["dairy", "nuts"], true],
+        ["Huevos rotos", "Fried eggs over potatoes with ham", "$15.00", ["egg"], false],
+      ],
+      "Sandwiches": [
+        ["Calamari sandwich", "Rustic bread, aioli on request", "$10.50", ["gluten", "egg", "shellfish"], false],
+        ["Pork loin bocadillo", "With roasted red pepper", "$9.00", ["gluten"], false],
+        ["Veggie sandwich", "Lettuce, tomato, egg and mayo", "$8.50", ["gluten", "egg"], true],
+      ],
+      "Desserts": [
+        ["Basque cheesecake", "House recipe", "$8.00", ["dairy", "egg", "gluten"], true],
+        ["Flan", "Classic Spanish custard", "$6.50", ["dairy", "egg"], true],
+        ["Seasonal fruit", "", "$5.00", [], true],
+      ],
+    };
+
+    const filters = {
+      gluten_free: ["Gluten-free", dish => !dish[3].includes("gluten")],
+      dairy_free: ["Dairy-free", dish => !dish[3].includes("dairy")],
+      vegetarian: ["Vegetarian", dish => dish[4]],
+    };
+
+    // Hours: [day, open, close] in 24h format (closing after midnight: "01:00"); shown as am/pm
+    const hours = [
+      ["Sunday", "11:00", "17:00"],
+      ["Monday", null],
+      ["Tuesday", "08:00", "23:30"],
+      ["Wednesday", "08:00", "23:30"],
+      ["Thursday", "08:00", "23:30"],
+      ["Friday", "08:00", "01:00"],
+      ["Saturday", "10:00", "01:00"],
+    ];
+
+    // =====================================================================
+    //  LOGIC (no need to touch this)
+    // =====================================================================
+
+    document.getElementById("daily-list").innerHTML = lunchSpecial.map(p => `<li>${p}</li>`).join("");
+
+    let category = Object.keys(menu)[0];
+    const active = new Set();
+
+    const tabs = document.getElementById("cat-tabs");
+    tabs.innerHTML = Object.keys(menu).map(c =>
+      `<button class="chip" role="tab" aria-selected="${c === category}" data-cat="${c}">${c}</button>`
+    ).join("");
+    tabs.addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b) return;
+      category = b.dataset.cat;
+      tabs.querySelectorAll("button").forEach(x => x.setAttribute("aria-selected", x === b));
+      renderMenu();
+    });
+
+    const filtersEl = document.getElementById("filters");
+    filtersEl.innerHTML = Object.entries(filters).map(([id, [label]]) =>
+      `<button class="chip filter" aria-pressed="false" data-f="${id}">${label}</button>`
+    ).join("");
+    filtersEl.addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b) return;
+      const id = b.dataset.f;
+      active.has(id) ? active.delete(id) : active.add(id);
+      b.setAttribute("aria-pressed", active.has(id));
+      renderMenu();
+    });
+
+    function renderMenu() {
+      const dishes = menu[category].filter(d => [...active].every(f => filters[f][1](d)));
+      document.getElementById("menu").innerHTML = dishes.length
+        ? dishes.map(([name, desc, price, alg, veg]) => `
+            <div class="dish">
+              <div class="dish-top"><h3>${name}</h3><span class="price">${price}</span></div>
+              ${desc ? `<p>${desc}</p>` : ""}
+              <div class="tags">
+                ${veg ? `<span class="tag veg">Vegetarian</span>` : ""}
+                ${alg.length ? alg.map(a => `<span class="tag">${allergens[a]}</span>`).join("") : `<span class="tag">No major allergens</span>`}
+              </div>
+            </div>`).join("")
+        : `<div class="empty">No dishes in this section match those filters. Try another section or ask our staff.</div>`;
+    }
+    renderMenu();
+
+    // Hours with today highlighted and open/closed status (handles closing after midnight)
+    const toMin = h => { const [hh, mm] = h.split(":").map(Number); return hh * 60 + mm; };
+    const fmt = h => { const [hh, mm] = h.split(":").map(Number); const ap = hh >= 12 ? "pm" : "am"; const h12 = hh % 12 || 12; return mm ? `${h12}:${String(mm).padStart(2, "0")}${ap}` : `${h12}${ap}`; };
+    const now = new Date();
+    const today = now.getDay();
+    const min = now.getHours() * 60 + now.getMinutes();
+
+    function openOn(day, minute) {
+      const [, op, cl] = hours[day];
+      if (!op) return false;
+      const a = toMin(op), c = toMin(cl);
+      return c > a ? (minute >= a && minute < c) : (minute >= a);
+    }
+    function openAfterMidnight(prevDay, minute) {
+      const [, op, cl] = hours[prevDay];
+      if (!op) return false;
+      const a = toMin(op), c = toMin(cl);
+      return c <= a && minute < c;
+    }
+    const open = openOn(today, min) || openAfterMidnight((today + 6) % 7, min);
+
+    const order = [1, 2, 3, 4, 5, 6, 0];
+    document.getElementById("hours").innerHTML = order.map(i => {
+      const [day, op, cl] = hours[i];
+      return `<tr class="${i === today ? "today" : ""}"><td>${day}</td><td>${op ? `${fmt(op)}–${fmt(cl)}` : "Closed"}</td></tr>`;
+    }).join("");
+
+    const status = document.getElementById("open-status");
+    status.textContent = open ? "Open now" : "Closed now";
+    status.className = "open-status " + (open ? "open" : "closed");
+  </script>
+</body>
+</html>
